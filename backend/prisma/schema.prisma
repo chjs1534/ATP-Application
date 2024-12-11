@@ -1,0 +1,86 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Player {
+  player_id   Int   @id
+  name_first  String?
+  name_last   String?
+  hand        String?
+  dob         String?
+  ioc         String?
+  height      Int?
+  wikidata_id String?
+}
+
+model Rankings {
+  id            Int     @id @default(autoincrement())
+  ranking_date  String?  
+  rank          Int?
+  player        Int?
+  points        Int?
+}
+
+model Matches {
+  id                  Int           @id @default(autoincrement())
+  tourney_id          String?       
+  tourney_name        String?
+  surface             String?
+  draw_size           Int?
+  tourney_level       String?
+  tourney_date        String?
+  match_num           Int?
+  winner_id           Int?
+  winner_seed         String?
+  winner_entry        String?
+  winner_name         String?
+  winner_hand         String?
+  winner_ht           Int?
+  winner_ioc          String?
+  winner_age          Float?
+  loser_id            Int?
+  loser_seed          String?
+  loser_entry         String?
+  loser_name          String?
+  loser_hand          String?
+  loser_ht            Int?
+  loser_ioc           String?
+  loser_age           Float?
+  score               String?
+  best_of             Int?
+  round               String?
+  minutes             Int?
+  w_ace               Int?
+  w_df                Int?
+  w_svpt              Int?
+  w_1stin             Int?
+  w_1stwon            Int?
+  w_2ndwon            Int?
+  w_svgms             Int?
+  w_bpsaved           Int?
+  w_bpfaced           Int?
+  l_ace               Int?
+  l_df                Int?
+  l_svpt              Int?
+  l_1stin             Int?
+  l_1stwon            Int?
+  l_2ndwon            Int?
+  l_svgms             Int?
+  l_bpsaved           Int?
+  l_bpfaced           Int?
+  winner_rank         Int?
+  winner_rank_points  Int?
+  loser_rank          Int?
+  loser_rank_points   Int?
+}
