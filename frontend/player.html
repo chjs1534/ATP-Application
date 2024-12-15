@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Player Page</title>
+    <link rel="stylesheet" href="/styles.css">
+    <link rel="stylesheet" href="/icons.css">
+</head>
+<body>
+    <div id="search__container">
+        <img src="/icons/noun-tennis-1671480.svg" alt="ATP Stats" style="width:75px;height:97px;"/>
+        <input type="text" class="search__bar">
+        <button id="search__button" onclick="searchPlayer()"></button>
+    </div>
+
+    <div id="navbar__container">
+        <h1>Home</h1>
+        <h1>My Players</h1>
+        <h1>Leaderboards</h1>
+        <h1>Tournaments</h1>
+    </div>
+
+    <div id="body__container">
+        <div id="stats__container">
+            <div id="winrate__container">
+                <div id="winrate__wheel">
+                    <div id="wheel__inner">
+                        <span id="winrate"></span>
+                    </div>
+                </div>
+                <div id="winrate__bars"> 
+                    <div class="surface__stats">
+                        <span id="hard__winrate">Hard - </span>
+                        <div class="winrate__bar">
+                            <div class="surface__winrate" id="hard__stats"></div>
+                        </div>
+                    </div>
+                    <div class="surface__stats">
+                        <span id="grass__winrate">Grass - </span>
+                        <div class="winrate__bar">
+                            <div class="surface__winrate" id="grass__stats"></div>
+                        </div>
+                    </div>
+                    <div class="surface__stats">
+                        <span id="clay__winrate">Clay - </span>
+                        <div class="winrate__bar">
+                            <div class="surface__winrate" id="clay__stats"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="rankingchart__container">
+                <svg id="line-chart" viewBox="0 0 400 200" preserveAspectRatio="none">
+                    <line x1="20" y1="180" x2="380" y2="180" stroke="#333" stroke-width="2"/>
+                    <line x1="20" y1="10" x2="20" y2="180" stroke="#333" stroke-width="2"/>
+
+                    <polyline 
+                        id="line__plot"
+                        fill="none" 
+                        stroke="#0116D3" 
+                        stroke-width="2"
+                        points=""/>
+                </svg>
+            </div>
+        </div>
+
+        <div id="main__container">
+            <div id="details__container">
+                <div id="personaldetails__container">
+                    <h3>Personal Details</h3>
+                    <p id="age">Age - </p>
+                    <p id="height">Height - </p>
+                    <p id="country">Country - </p>
+                </div>
+                <div id="titles__container">
+                    <h3>Titles</h3>
+                    <p id="num__titles">Titles - </p>
+                    <p id="num__grandslams">Grand Slams - </p>
+                    <p id="num__masters">Masters - </p>
+                </div>
+                <div id="headtohead__container">
+                    <h3>Head to Head</h3>
+                    <div id="headtohead__box">
+                        <div class="headtohead__circle" id="headtohead__player1"></div>
+                        <span>VS</span>
+                        <div class="headtohead__circle" id="headtohead__player1"></div>
+                    </div>
+                </div>
+            </div>
+            <div id="matches__container">
+            </div>
+        </div>    
+    </div>
+    
+    <div id="footer__container">
+        <div id="footer__left">
+            <h3>Home</h3>
+            <h3>About</h3>
+            <h3>News</h3>
+        </div>
+        <div>
+            <img src="/icons/noun-tennis-1671480.svg" alt="ATP Stats" style="width:75px;height:97px;"/>
+        </div>
+        <div>
+            <img src="/icons/noun-github-4289652.svg" alt="ATP Stats" style="width:75px;height:97px;">
+            <img src="ico" alt="ATP Stats" style="width:75px;height:97px;">
+        </div>
+    </div>
+    <script src="/app.js"></script>
+    <script src="/player.js"></script>
+</body>
+</html>

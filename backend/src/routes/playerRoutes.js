@@ -9,9 +9,6 @@ router.get('/getPlayerId/:playerName', async (req, res) => {
     const fullName = req.params.playerName
 
     const [firstName, lastName] = fullName.split(" ");
-    if (!firstName || !lastName) {
-        return res.status(400).json({ message: "Invalid player name format" })
-    }
 
     // Get player
     let player
@@ -183,7 +180,7 @@ router.get('/getPlayerDetails/:playerId', async (req, res) => {
     let playerDetails = {
         firstName: player.name_first,
         lastName: player.name_last,
-        age: player.age,
+        age: player.dob,
         height: player.height,
         country: player.ioc,
         rank: rank.rank,
