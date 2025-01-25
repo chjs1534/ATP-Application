@@ -58,11 +58,6 @@ router.get('/getPlayerDetails/:playerId', async (req, res) => {
     let rank
     try {
         rank = await getPlayerRank(prisma, playerId)
-
-        if (!rank) { 
-            return res.status(404).json({ message: "Player rank not found" }) 
-        }
-
     } catch (err) {
         console.error(err.message)
         return res.status(503).json({ message: "Service unavailable" })
@@ -72,10 +67,6 @@ router.get('/getPlayerDetails/:playerId', async (req, res) => {
     let titlesCount
     try {
         titlesCount = await getPlayerTitles(prisma, playerId)
-
-        if (!titlesCount) {
-            return res.status(404).json({ message: "Player titles not found" })
-        }
     } catch (err) {
         console.error(err.message)
         return res.status(503).json({ message: "Service unavailable" })
@@ -84,10 +75,6 @@ router.get('/getPlayerDetails/:playerId', async (req, res) => {
     let grandSlamsCount
     try {
         grandSlamsCount = await getPlayerTitles(prisma, playerId, 'G')
-
-        if (!grandSlamsCount) {
-            return res.status(404).json({ message: "Player titles not found" })
-        }
     } catch (err) {
         console.error(err.message)
         return res.status(503).json({ message: "Service unavailable" })
@@ -96,10 +83,6 @@ router.get('/getPlayerDetails/:playerId', async (req, res) => {
     let mastersCount
     try {
         mastersCount = await getPlayerTitles(prisma, playerId, 'G')
-
-        if (!mastersCount) {
-            return res.status(404).json({ message: "Player titles not found" })
-        }
     } catch (err) {
         console.error(err.message)
         return res.status(503).json({ message: "Service unavailable" })
@@ -109,10 +92,6 @@ router.get('/getPlayerDetails/:playerId', async (req, res) => {
     let winrate
     try {
         winrate = await getPlayerWinrate(prisma, playerId)
-        
-        if (!winrate) {
-            return res.status(404).json({ message: "Player winrate not found" })
-        }
     } catch (err) {
         console.error(err.message)
         return res.status(503).json({ message: "Service unavailable" })
@@ -121,10 +100,6 @@ router.get('/getPlayerDetails/:playerId', async (req, res) => {
     let hardWinrate
     try {
         hardWinrate = await getPlayerWinrate(prisma, playerId, 'Hard')
-        
-        if (!winrate) {
-            return res.status(404).json({ message: "Player winrate not found" })
-        }
     } catch (err) {
         console.error(err.message)
         return res.status(503).json({ message: "Service unavailable" })
@@ -133,10 +108,6 @@ router.get('/getPlayerDetails/:playerId', async (req, res) => {
     let clayWinrate
     try {
         clayWinrate = await getPlayerWinrate(prisma, playerId, 'Clay')
-        
-        if (!winrate) {
-            return res.status(404).json({ message: "Player winrate not found" })
-        }
     } catch (err) {
         console.error(err.message)
         return res.status(503).json({ message: "Service unavailable" })
@@ -145,10 +116,6 @@ router.get('/getPlayerDetails/:playerId', async (req, res) => {
     let grassWinrate
     try {
         grassWinrate = await getPlayerWinrate(prisma, playerId, 'Grass')
-        
-        if (!winrate) {
-            return res.status(404).json({ message: "Player winrate not found" })
-        }
     } catch (err) {
         console.error(err.message)
         return res.status(503).json({ message: "Service unavailable" })
