@@ -13,6 +13,7 @@ export default function Search({ sizeStyles, playerId, setPlayerId }: SearchProp
     const [playerName, setPlayerName] = useState<string>("");
     const [players, setPlayers] = useState<Array<string>>([]);
     const [suggestions, setSuggestions] = useState<Array<string>>([]);
+    const [doSearch, setDoSearch] = useState<Boolean>(false);
 
     useEffect(() => {
         const loadPlayers = async() => {
@@ -22,24 +23,28 @@ export default function Search({ sizeStyles, playerId, setPlayerId }: SearchProp
         loadPlayers();
     }, [playerName])
 
-    const searchPlayer = async () => {
-        if (!playerName) return;
+    useEffect(() => {
+        const searchPlayer = async () => {
 
-        let url = `http://localhost:8080/player/getPlayerId/${playerName}`;
-        try {
-            const response = await fetch(url);
-            if (!response.ok) {
-                throw new Error(`Response status: ${response.status}`);
+            let url = `http://localhost:8080/player/getPlayerId/${playerName}`;
+            try {
+                const response = await fetch(url);
+                if (!response.ok) {
+                    throw new Error(`Response status: ${response.status}`);
+                }
+    
+                const json = await response.json();
+                setPlayerId(json.playerId);
+                setPlayerName("");
+                setDoSearch(false);
+                navigate(`/player/${playerId}`);
+            } catch (err) {
+                console.error(err); 
             }
-
-            const json = await response.json();
-            setPlayerId(json.playerId);
-            setPlayerName("");
-            navigate(`/player/${playerId}`);
-        } catch (err) {
-            console.error(err); 
         }
-    }
+
+        if (doSearch && playerName) searchPlayer();
+    }, [doSearch]);
 
     useEffect(() => {
         let matches : Array<string> = [];
@@ -57,15 +62,20 @@ export default function Search({ sizeStyles, playerId, setPlayerId }: SearchProp
         setPlayerName(e.target.value);
     };
 
-    const handleKeyPress = async (e: React.KeyboardEvent<HTMLInputElement>) => {
+    const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
         if (e.key === "Enter") {
-            await searchPlayer();
+            setDoSearch(true);
         }
     };
 
-    const handleSuggestionClick = async(index: number) => {
+    const handleSearchPress = () => {
+        setDoSearch(true);
+    }
+
+    const handleSuggestionClick = (index: number) => {
+        console.log(players[index]);
         setPlayerName(players[index]);
-        await searchPlayer();
+        setDoSearch(true);
     };
 
     return (
@@ -73,7 +83,7 @@ export default function Search({ sizeStyles, playerId, setPlayerId }: SearchProp
                 className={
                     `flex justify-center
                     absolute w-[1200px] ${sizeStyles} 
-                    shadow-lg rounded-[15px]`
+                    shadow-lg rounded-[15px] z-50 bg-white`
                 }
                 style={{ height: `${80 + 48 * suggestions.length}px` }}    
             >
@@ -91,7 +101,7 @@ export default function Search({ sizeStyles, playerId, setPlayerId }: SearchProp
                 <i 
                     className="fa-solid fa-magnifying-glass absolute top-[40px] 
                     -translate-y-1/2 right-[16px] cursor-pointer"
-                    onClick={searchPlayer} 
+                    onClick={handleSearchPress} 
                 />
                 {suggestions && suggestions.map((currSuggestions, index) => 
                     <div 

@@ -5,6 +5,7 @@ import {
 } from "react-router-dom";
 import Home from './components/Home';
 import Player from './components/Player';
+import Rankings from './components/Rankings'
 import { useState } from 'react';
 
 function App() {
@@ -27,6 +28,25 @@ function App() {
             playerId={playerId}
             setPlayerId={setPlayerId}
           />
+        }
+      />
+      <Route
+        path="/rankings"
+        element = {
+          <Rankings
+          />
+        }
+      />
+      <Route
+        path="/headToHead"
+        element = {
+          <div>Not yet implemented</div>
+        }
+      />
+      <Route
+        path="/matchPredictions"
+        element = {
+          <div>Not yet implemented</div>
         }
       />
 		</Routes>

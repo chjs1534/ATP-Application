@@ -30,7 +30,7 @@ router.get('/getPlayerId/:playerName', async (req, res) => {
             return res.status(404).json({ message: "Player not found" }) 
         }
     } catch (err) {
-        console.err(err.message)
+        console.log(err.message)
         return res.status(503).json({ message: "Service unavailable" })
     }
 
@@ -42,82 +42,87 @@ router.get('/getPlayerDetails/:playerId', async (req, res) => {
     const playerId = parseInt(req.params.playerId);
 
     // Get player
-    let player
+    let player = {
+        name_first: "",
+        name_last: "",
+        age: 0,
+        height: 0,
+        country: "" 
+    }
     try {
         player = await getPlayerById(prisma, playerId)
-
         if (!player) { 
             return res.status(404).json({ message: "Player not found" }) 
         }
     } catch (err) {
-        console.error(err.message)
+        console.log(err.message)
         return res.status(503).json({ message: "Service unavailable" })
     }
 
     // Get player rank
-    let rank
+    let rank = 0
     try {
         rank = await getPlayerRank(prisma, playerId)
     } catch (err) {
-        console.error(err.message)
+        console.log(err.message)
         return res.status(503).json({ message: "Service unavailable" })
     }
     
     // Get player titles
-    let titlesCount
+    let titlesCount = 0
     try {
         titlesCount = await getPlayerTitles(prisma, playerId)
     } catch (err) {
-        console.error(err.message)
+        console.log(err.message)
         return res.status(503).json({ message: "Service unavailable" })
     }
 
-    let grandSlamsCount
+    let grandSlamsCount = 0
     try {
         grandSlamsCount = await getPlayerTitles(prisma, playerId, 'G')
     } catch (err) {
-        console.error(err.message)
+        console.log(err.message)
         return res.status(503).json({ message: "Service unavailable" })
     }
 
-    let mastersCount
+    let mastersCount = 0
     try {
         mastersCount = await getPlayerTitles(prisma, playerId, 'G')
     } catch (err) {
-        console.error(err.message)
+        console.log(err.message)
         return res.status(503).json({ message: "Service unavailable" })
     }
     
     // Get player winrates
-    let winrate
+    let winrate = 0
     try {
         winrate = await getPlayerWinrate(prisma, playerId)
     } catch (err) {
-        console.error(err.message)
+        console.log(err.message)
         return res.status(503).json({ message: "Service unavailable" })
     }
     
-    let hardWinrate
+    let hardWinrate = 0
     try {
         hardWinrate = await getPlayerWinrate(prisma, playerId, 'Hard')
     } catch (err) {
-        console.error(err.message)
+        console.log(err.message)
         return res.status(503).json({ message: "Service unavailable" })
     }
 
-    let clayWinrate
+    let clayWinrate = 0
     try {
         clayWinrate = await getPlayerWinrate(prisma, playerId, 'Clay')
     } catch (err) {
-        console.error(err.message)
+        console.log(err.message)
         return res.status(503).json({ message: "Service unavailable" })
     }
 
-    let grassWinrate
+    let grassWinrate = 0
     try {
         grassWinrate = await getPlayerWinrate(prisma, playerId, 'Grass')
     } catch (err) {
-        console.error(err.message)
+        console.log(err.message)
         return res.status(503).json({ message: "Service unavailable" })
     }
 
@@ -129,7 +134,7 @@ router.get('/getPlayerDetails/:playerId', async (req, res) => {
             orderBy: { ranking_date: 'desc' }
         })
     } catch (err) {
-        console.error(err.message)
+        console.log(err.message)
         return res.status(503).json({ message: "Service unavailable" })
     }
 
@@ -177,7 +182,7 @@ router.get('/getPlayerMatches/:playerId', async (req, res) => {
             return res.status(404).json({ message: "Player not found" }) 
         }
     } catch {
-        console.error(err.message)
+        console.log(err.message)
         return res.status(503).json({ message: "Service unavailable" })
     }
 
@@ -191,7 +196,7 @@ router.get('/getPlayerMatches/:playerId', async (req, res) => {
         }
 
     } catch (err) {
-        console.error(err.message)
+        console.log(err.message)
         return res.status(503).json({ message: "Service unavailable" })
     }
 
@@ -217,7 +222,7 @@ router.get('/getPlayerMatches/:playerId', async (req, res) => {
             return res.status(404).json({ message: "Matches not found" }) 
         }
     } catch (err) {
-        console.error(err.message)
+        console.log(err.message)
         return res.status(503).json({ message: "Service unavailable" })
     }
 
@@ -233,7 +238,7 @@ router.get('/getPlayerMatches/:playerId', async (req, res) => {
                 return res.status(404).json({ message: "Player not found" }) 
             }
         } catch {
-            console.error(err.message)
+            console.log(err.message)
             return res.status(503).json({ message: "Service unavailable" })
         }
 
@@ -247,7 +252,7 @@ router.get('/getPlayerMatches/:playerId', async (req, res) => {
             }
 
         } catch (err) {
-            console.error(err.message)
+            console.log(err.message)
             return res.status(503).json({ message: "Service unavailable" })
         }
 

@@ -10,8 +10,20 @@ interface PlayerProps {
     setPlayerId: React.Dispatch<React.SetStateAction<number>>; 
 }
 
+interface Player {
+    playerId?: number;
+    firstName?: string;
+    lastName?: string;
+    age?: number;
+    height?: string;
+    country?: string;
+    titles?: number;
+    grandSlams?: number;
+    masters?: number;
+}
+
 function Player({ playerId, setPlayerId }: PlayerProps) {
-    const [playerDetails, setPlayerDetails] = useState<{}>({});
+    const [playerDetails, setPlayerDetails] = useState<Player>({});
 	const [playerMatches, setPlayerMatches] = useState<Array<{}>>([]);
 
     useEffect(() => {
@@ -53,16 +65,22 @@ function Player({ playerId, setPlayerId }: PlayerProps) {
 
     return playerId && playerDetails && playerMatches ?
         (
-            <div>
+            <div className="relative z-0">
                 <NavBar />
                 <div className="flex justify-center">
                     <div className="w-[1200px]">
-                        <Search sizeStyles="top-[152px]" playerId={playerId} setPlayerId={setPlayerId} /> 
-                        <h3 className="text-blacks-75 absolute top-[392px]">
+                        <div className="absolute top-[152px] w-full z-50">
+                            <Search 
+                                sizeStyles="" 
+                                playerId={playerId} 
+                                setPlayerId={setPlayerId} 
+                            />
+                        </div>
+                        <h3 className="text-blacks-75 absolute top-[304px] z-0">
                             {playerDetails.firstName} {playerDetails.lastName}
                         </h3>
                         <PlayerDetails playerDetails={playerDetails} />
-                        <h4 className="text-blacks-75 absolute top-[686px]">Recent Matches</h4>
+                        <h4 className="text-blacks-75 absolute top-[646px]">Recent Matches</h4>
                         <PlayerMatches playerMatches={playerMatches} />
                     </div>
                 </div>

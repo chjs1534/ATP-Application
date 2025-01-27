@@ -33,7 +33,7 @@ export default function PlayerMatches({ playerMatches }: PlayerMatchesProps) {
                 <div 
                     key={index} 
                     className="relative w-[1200px]" 
-                    style={{ top: `${752 + 24 * index}px` }}
+                    style={{ top: `${712 + 24 * index}px` }}
                 >
                     <div className="flex justify-between shadow-lg p-[16px] rounded-[15px]">
                         <div className="flex flex-col gap-[8px]">
